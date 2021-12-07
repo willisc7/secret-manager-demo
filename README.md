@@ -1,3 +1,7 @@
+This repo will demonstrate two things:
+* Creating a secret using the Go Secret Manager client libraries
+* Reading a secret in a kubernetes pod using workload identity
+
 0. Create a GKE autopilot cluster and get the credentials
     ```
     gcloud beta container clusters create-auto cluster-1 --region us-central1
