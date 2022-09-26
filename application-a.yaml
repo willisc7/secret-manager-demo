@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: secret-manager-demo
+  name: application-a
   labels:
-    purpose: secret-manager-demo
+    purpose: application-a
 spec:
-  serviceAccountName: secret-manager-demo-svc
+  serviceAccountName: app-a-svc
   containers:
-  - name: secret-manager-demo
+  - name: application-a
     image: google/cloud-sdk:365.0.1
     command: ["/bin/sh","-c"]
     args: ["echo $(gcloud secrets versions access latest --secret='my-secret') && sleep infinity"]

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: application-b
+  labels:
+    purpose: application-b
+spec:
+  containers:
+  - name: application-b
+    image: google/cloud-sdk:365.0.1
+    env:
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: "/etc/credentials/application-b-credentials.json"
+    volumeMounts:
+    - name: credentials
+      mountPath: "/etc/credentials"
+      readOnly: true
+    command: ["/bin/sh","-c"]
+    args: ["gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS && echo $(gcloud secrets versions access latest --secret='another-secret') && sleep infinity"]
+  volumes:
+  - name: credentials
+    secret:
+      secretName: app-b-credentials
+      optional: false
+  restartPolicy: OnFailure
